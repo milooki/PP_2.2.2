@@ -4,14 +4,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import web.dao.CarDao;
 import web.service.CarService;
 import web.service.CarServiceImp;
 
 
 @Controller
 public class CarController {
-    @Autowired
-    private final CarService carService = new CarServiceImp();
+    private final CarService carService;
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping(value = "/cars")
     public String getCarsList(@RequestParam (value = "count", defaultValue = "5") Integer count, Model model) {
